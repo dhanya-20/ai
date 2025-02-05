@@ -1,33 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let searchInput = document.getElementById("search");
-    let categories = document.querySelectorAll(".category");
+const preservationMethods = {
+    "milk": "Pasteurization, Freezing, UHT Treatment",
+    "cheese": "Refrigeration, Wax Coating",
+    "fish": "Freezing, Smoking, Drying, Canning",
+    "meat": "Freezing, Curing, Smoking",
+    "apples": "Refrigeration, Drying, Canning",
+    "tomatoes": "Canning, Freezing, Drying"
+};
 
-    searchInput.addEventListener("keyup", function () {
-        let filter = searchInput.value.toLowerCase().trim();
+// Function to handle sending messages
+function sendMessage() {
+    let userInput = document.getElementById("user-input").value.trim().toLowerCase();
+    let chatBox = document.getElementById("chat-box");
 
-        categories.forEach(category => {
-            let foods = category.querySelectorAll(".food");
-            let categoryTitle = category.getAttribute("data-category").toLowerCase();
-            let categoryMatch = categoryTitle.includes(filter);
-            let foundInCategory = false; // To check if any food in this category matches
+    if (userInput === "") return; // Ignore empty messages
 
-            foods.forEach(food => {
-                let foodName = food.getAttribute("data-name").toLowerCase();
+    // Add user's message to chat
+    let userMessage = document.createElement("p");
+    userMessage.className = "user-message";
+    userMessage.textContent = "You: " + userInput;
+    chatBox.appendChild(userMessage);
 
-                if (foodName.includes(filter) || categoryMatch) {
-                    food.style.display = "block"; // Show matching food
-                    foundInCategory = true;
-                } else {
-                    food.style.display = "none"; // Hide non-matching food
-                }
-            });
+    // Get bot response
+    let botMessage = document.createElement("p");
+    botMessage.className = "bot-message";
 
-            // Show or hide the category based on whether it contains a visible food
-            if (foundInCategory || categoryMatch) {
-                category.style.display = "block"; // Show the category
-            } else {
-                category.style.display = "none"; // Hide the category
-            }
-        });
-    });
-});
+    if (preservationMethods[userInput]) {
+        botMessage.textContent = "🤖 Bot: " + preservationMethods[userInput];
+    } else {
+        botMessage.textContent = "🤖 Bot: Sorry, I don't have data for that food.";
+    }
+
+    chatBox.appendChild(botMessage);
+
+    // Scroll chat to the bottom
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Clear input field
+    document.getElementById("user-input").value = "";
+}
+
+// Function to send message when pressing "Enter"
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+}
