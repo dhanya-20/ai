@@ -1,21 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
     let searchInput = document.getElementById("search");
-    let foodItems = document.querySelectorAll(".food");
+    let categories = document.querySelectorAll(".category");
 
-    // Listen for input in the search bar
     searchInput.addEventListener("keyup", function () {
-        let filter = searchInput.value.toLowerCase().trim(); // Convert input to lowercase and trim spaces
+        let filter = searchInput.value.toLowerCase().trim();
+        let foundAny = false; // Track if any food matches the search
 
-        foodItems.forEach(food => {
-            let foodName = food.getAttribute("data-name").toLowerCase();
-            let foodCategory = food.getAttribute("data-category").toLowerCase();
+        categories.forEach(category => {
+            let foods = category.querySelectorAll(".food");
+            let categoryTitle = category.getAttribute("data-category").toLowerCase();
+            let categoryMatch = categoryTitle.includes(filter);
+            let foundInCategory = false;
 
-            // Show if it matches the food name OR category
-            if (foodName.includes(filter) || foodCategory.includes(filter)) {
-                food.style.display = "block";
-            } else {
-                food.style.display = "none";
-            }
+            foods.forEach(food => {
+                let foodName = food.getAttribute("data-name").toLowerCase();
+
+                if (foodName.includes(filter) || categoryMatch) {
+                    food.style.display = "block"; // Show matching food
+                    foundInCategory = true;
+                    foundAny = true;
+                } else {
+                    food.style.display = "none"; // Hide non-matching food
+                }
+            });
+
+            // Show or hide the entire category
+            category.style.display = foundInCategory ? "block" : "none";
         });
+
+        // If no matches, show a message (optional)
+        if (!foundAny) {
+            alert("No matching items found!"); // You can remove this line if not needed
+        }
     });
 });
