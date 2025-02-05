@@ -1,22 +1,20 @@
-// Wait for the DOM to load before running the script
 document.addEventListener("DOMContentLoaded", function () {
-    // Select the search input and food items
     let searchInput = document.getElementById("search");
     let foodItems = document.querySelectorAll(".food");
 
-    // Add an event listener to the search bar
+    // Listen for input in the search bar
     searchInput.addEventListener("keyup", function () {
-        let filter = searchInput.value.toLowerCase(); // Get search input text
+        let filter = searchInput.value.toLowerCase().trim(); // Convert input to lowercase and trim spaces
 
-        // Loop through each food item
         foodItems.forEach(food => {
             let foodName = food.getAttribute("data-name").toLowerCase();
+            let foodCategory = food.getAttribute("data-category").toLowerCase();
 
-            // Show/hide based on search match
-            if (foodName.includes(filter)) {
-                food.style.display = "block"; // Show matching items
+            // Show if it matches the food name OR category
+            if (foodName.includes(filter) || foodCategory.includes(filter)) {
+                food.style.display = "block";
             } else {
-                food.style.display = "none"; // Hide non-matching items
+                food.style.display = "none";
             }
         });
     });
