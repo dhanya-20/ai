@@ -9,37 +9,42 @@
 <body>
     <header>
         <h1>Food Preservation Search</h1>
-        <input type="text" id="search" placeholder="Search for a food...">
+        <input type="text" id="search" placeholder="Search for a food or category...">
     </header>
 
     <section id="foods">
-        <div class="food" data-name="Milk">
+        <div class="food" data-name="Milk" data-category="Dairy">
             <h2>Milk</h2>
+            <p><strong>Category:</strong> Dairy</p>
             <p><strong>Preservation Methods:</strong> Pasteurization, Freezing, UHT Treatment</p>
         </div>
-        <div class="food" data-name="Fish">
+        <div class="food" data-name="Cheese" data-category="Dairy">
+            <h2>Cheese</h2>
+            <p><strong>Category:</strong> Dairy</p>
+            <p><strong>Preservation Methods:</strong> Refrigeration, Wax Coating</p>
+        </div>
+        <div class="food" data-name="Fish" data-category="Meat">
             <h2>Fish</h2>
+            <p><strong>Category:</strong> Meat</p>
             <p><strong>Preservation Methods:</strong> Freezing, Smoking, Drying, Canning</p>
         </div>
-        <div class="food" data-name="Apples">
-            <h2>Apples</h2>
-            <p><strong>Preservation Methods:</strong> Refrigeration, Drying, Canning</p>
-        </div>
-        <div class="food" data-name="Meat">
+        <div class="food" data-name="Meat" data-category="Meat">
             <h2>Meat</h2>
+            <p><strong>Category:</strong> Meat</p>
             <p><strong>Preservation Methods:</strong> Freezing, Curing, Smoking</p>
         </div>
-        <div class="food" data-name="Tomatoes">
-            <h2>Tomatoes</h2>
-            <p><strong>Preservation Methods:</strong> Canning, Freezing, Drying</p>
+        <div class="food" data-name="Apples" data-category="Fruits">
+            <h2>Apples</h2>
+            <p><strong>Category:</strong> Fruits</p>
+            <p><strong>Preservation Methods:</strong> Refrigeration, Drying, Canning</p>
         </div>
-        <div class="food" data-name="Cheese">
-            <h2>Cheese</h2>
-            <p><strong>Preservation Methods:</strong> Refrigeration, Wax Coating</p>
+        <div class="food" data-name="Tomatoes" data-category="Vegetables">
+            <h2>Tomatoes</h2>
+            <p><strong>Category:</strong> Vegetables</p>
+            <p><strong>Preservation Methods:</strong> Canning, Freezing, Drying</p>
         </div>
     </section>
 
-    <!-- Correct script linking -->
     <script src="script.js"></script>
 </body>
 </html>
