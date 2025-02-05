@@ -4,13 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchInput.addEventListener("keyup", function () {
         let filter = searchInput.value.toLowerCase().trim();
-        let foundAny = false; // Track if any food matches the search
 
         categories.forEach(category => {
             let foods = category.querySelectorAll(".food");
             let categoryTitle = category.getAttribute("data-category").toLowerCase();
             let categoryMatch = categoryTitle.includes(filter);
-            let foundInCategory = false;
+            let foundInCategory = false; // To check if any food in this category matches
 
             foods.forEach(food => {
                 let foodName = food.getAttribute("data-name").toLowerCase();
@@ -18,19 +17,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (foodName.includes(filter) || categoryMatch) {
                     food.style.display = "block"; // Show matching food
                     foundInCategory = true;
-                    foundAny = true;
                 } else {
                     food.style.display = "none"; // Hide non-matching food
                 }
             });
 
-            // Show or hide the entire category
-            category.style.display = foundInCategory ? "block" : "none";
+            // Show or hide the category based on whether it contains a visible food
+            if (foundInCategory || categoryMatch) {
+                category.style.display = "block"; // Show the category
+            } else {
+                category.style.display = "none"; // Hide the category
+            }
         });
-
-        // If no matches, show a message (optional)
-        if (!foundAny) {
-            alert("No matching items found!"); // You can remove this line if not needed
-        }
     });
 });
